@@ -84,7 +84,9 @@ class Store extends Service
         $init_compelte = 0;
         if (is_array($stores) && !empty($stores)) {
             foreach ($stores as $store_code => $store) {
+                // 根据域名获取store中对应域名的配置
                 if ($host[1] == $store_code) {
+                    // 检查
                     $this->html5DevideCheckAndRedirect($store_code, $store);
                     Yii::$service->store->currentStore = $store_code;
                     $this->store = $store;
@@ -162,10 +164,10 @@ class Store extends Service
     }
 
     /**
-     * @property $store_code | String 
-     * @property $store | Array
-     * mobile devide url redirect.
      * pc端自动跳转到html5端的检测
+     * @param  [type] $store_code 当前访问的域名
+     * @param  [type] $store      当前域名对应的store配置
+     * @return [type]             [description]
      */
     protected function html5DevideCheckAndRedirect($store_code, $store)
     {
@@ -176,12 +178,18 @@ class Store extends Service
         if (!$enable) {
             return;
         }
+        // 跳转的条件
         $condition = isset($store['mobile']['condition']) ? $store['mobile']['condition'] : false;
+        // 跳转到的域名
         $redirectDomain = isset($store['mobile']['redirectDomain']) ? $store['mobile']['redirectDomain'] : false;
+        // 跳转的类型
         $redirectType = isset($store['mobile']['type']) ? $store['mobile']['type'] : false;
+        // 如果是要跳h5，可以直接跳转，因为pc的路由和h5的一致
         if (is_array($condition) && !empty($condition) && !empty($redirectDomain) && $redirectType === 'apphtml5') {
             $mobileDetect = Yii::$service->helper->mobileDetect;
+            // 是否使用https
             $mobile_https = (isset($store['mobile']['https']) && $store['mobile']['https']) ? true : false;
+            // 终端符合条件进行跳转,直接跳不就行了，还弄这么多判断???
             if (in_array('phone', $condition) && in_array('tablet', $condition)) {
                 if ($mobileDetect->isMobile()) {
                     $this->redirectAppHtml5Mobile($store_code, $redirectDomain, $mobile_https);
@@ -199,12 +207,15 @@ class Store extends Service
     }
 
     /**
-     * @property $store_code | String
-     * @property $redirectDomain | String
-     * 检测，html5端跳转检测
+     * 检测，html5端跳转检测        
+     * @param  [type] $store_code     当前访问的域名
+     * @param  [type] $redirectDomain 要跳转的域名
+     * @param  [type] $mobile_https   是否使用https
+     * @return [type]                 [description]
      */
     protected function redirectAppHtml5Mobile($store_code, $redirectDomain, $mobile_https)
     {
+        // 当前的url
         $currentUrl = Yii::$service->url->getCurrentUrl();
         $redirectUrl = str_replace($store_code, $redirectDomain, $currentUrl);
         // pc端跳转到html5，可能一个是https，一个是http，因此需要下面的代码进行转换。
@@ -225,6 +236,7 @@ class Store extends Service
         exit;
     }
     /**
+     * 判断是否符合h5跳转到vue端
      * @return boolean, 检测是否属于满足跳转到appserver的条件
      */
     public function isAppServerMobile(){

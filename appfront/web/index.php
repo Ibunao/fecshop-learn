@@ -1,8 +1,9 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE & ~E_COMPILE_WARNING ); //除去 E_NOTICE E_COMPILE_WARNING 之外的所有错误信息
-//ini_set('session.cookie_domain', '.fancyecommerce.com'); //初始化域名，
+//ini_set('session.cookie_domain', '.fancyecommerce.com'); //初始化域名，共享session
 $http = ($_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
 $homeUrl = $http.'://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']), '\\/');
+// echo $homeUrl;exit;
 /**
  * fecshop 使用合并配置（config）数组进行加速，true 代表打开。
  * 打开配置加速开关前，您需要执行 http://domain/index-merge-config.php 进行生成单文件配置数组。

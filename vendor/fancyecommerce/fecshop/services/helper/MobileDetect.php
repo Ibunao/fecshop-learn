@@ -644,6 +644,7 @@ class MobileDetect extends Service
         array $headers = null,
         $userAgent = null
     ) {
+        // 设置请求头
         $this->setHttpHeaders($headers);
         $this->setUserAgent($userAgent);
     }
@@ -1044,6 +1045,7 @@ class MobileDetect extends Service
     public $_is_mobile;
 
     /**
+     * 检查是否是手机端
      * Check if the device is mobile.
      * Returns true if any type of mobile device detected, including special ones.
      * @param  null $userAgent   deprecated

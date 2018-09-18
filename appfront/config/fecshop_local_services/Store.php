@@ -5,7 +5,7 @@
         'stores' => [
             # 数据的key就是域名
             'appfront.fecshoptest.com' => [
-                'language'      => 'en_US',   # 语言必须在上面第五步的fecshoplang中定义，否则将无法得到语言属性。
+                'language'      => 'en_US',   # 语言必须在上面第五步的fecshoplang文件中定义，否则将无法得到语言属性。
                 'languageName'  => 'English', # 在添加store的时候，必须查看 添加的语言在 fecshoplang中是否定义。
                 # 定义本地模板路径，用来重写fecshop的模板，或者开发新的模板文件。
                 //'localThemeDir'   => '@appfront/theme/terry/theme01',
@@ -16,7 +16,9 @@
                 'mobile'        => [ # 当设备满足什么条件的时候，进行跳转。
                     'enable'        => true,
                     'condition'     => ['phone','tablet'], # phone 代表手机，tablet代表平板
-                    'redirectUrl'   => 'apphtml5.fecshoptest.com',  # 如果是移动设备访问进行域名跳转
+                    'redirectDomain'   => 'apphtml5.fecshoptest.com',  # 如果是移动设备访问进行域名跳转
+                    'https'  => false,  // 手机端url是否支持https,如果支持，设置https为true，如果不支持，设置为false
+                    'type'  => 'appserver',  //  填写值选择：[apphtml5, appserver]，如果是 apphtml5 ， 则表示跳转到html5入口，如果是appserver，则表示跳转到vue这种appserver对应的入口
                 ],
                 # 第三方账号登录配置
                 'thirdLogin' => [

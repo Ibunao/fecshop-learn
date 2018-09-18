@@ -11,6 +11,7 @@
  * 该配置文件会加载./modules/*.php，并合并成一个数组，返回。
  */
 $modules = [];
+// 合并module配置
 foreach (glob(__DIR__ . '/modules/*.php') as $filename) {
     $modules = array_merge($modules, require($filename));
 }

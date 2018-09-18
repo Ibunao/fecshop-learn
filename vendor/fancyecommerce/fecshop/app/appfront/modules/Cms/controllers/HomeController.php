@@ -9,16 +9,7 @@ class HomeController extends AppfrontController
 {
     public function init()
     {
-        //echo 1222;exit;
         parent::init();
-    }
-
-    // 网站信息管理
-    public function actionIndex()
-    {
-        $data = $this->getBlock()->getLastData();
-
-        return $this->render($this->action->id, $data);
     }
 
     public function behaviors()
@@ -55,6 +46,14 @@ class HomeController extends AppfrontController
         }
         return $behaviors;
     }
+    
+    // 网站信息管理
+    public function actionIndex()
+    {
+        $data = $this->getBlock()->getLastData();
+        return $this->render($this->action->id, $data);
+    }
+
 
     public function actionChangecurrency()
     {
