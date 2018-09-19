@@ -40,7 +40,7 @@ class Application
      */
     public function getChildService($childServiceName)
     {
-        
+        // 如果没有实例化，进行实例化
         if (!$this->_childService[$childServiceName]) {
             $childService = $this->childService;
             if (isset($childService[$childServiceName])) {

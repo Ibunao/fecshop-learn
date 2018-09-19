@@ -20,11 +20,15 @@ use yii\base\InvalidValueException;
 class Store extends Service
 {
     /**
+     * 配置数组
      * init by config file.
      * all stores config . include : domain,language,theme,themePackage.
      */
     public $stores;
-
+    /**
+     * 保存的是当前的store配置
+     * @var [type]
+     */
     public $store;
     /**
      * current store language,for example: en_US,fr_FR.
@@ -44,6 +48,7 @@ class Store extends Service
     //public $currentTheme = 'default';
     /**
      * 当前store的key，也就是当前的store.
+     * 如 appfront.fecshoptest.com
      */
     public $currentStore;
     /**
@@ -77,6 +82,11 @@ class Store extends Service
      *  if current store_code is not config , InvalidValueException will be throw.
      *	class property $currentStore will be set value $store_code.
      */
+    /**
+     * 初始化
+     * @param  [type] $app 
+     * @return [type]      [description]
+     */
     protected function actionBootstrap($app)
     {
         $host = explode('//', $app->getHomeUrl());
@@ -86,7 +96,7 @@ class Store extends Service
             foreach ($stores as $store_code => $store) {
                 // 根据域名获取store中对应域名的配置
                 if ($host[1] == $store_code) {
-                    // 检查
+                    // 检查是否从pc跳转到h5
                     $this->html5DevideCheckAndRedirect($store_code, $store);
                     Yii::$service->store->currentStore = $store_code;
                     $this->store = $store;
@@ -94,6 +104,7 @@ class Store extends Service
                         Yii::$service->store->currentLang = $store['language'];
                         Yii::$service->store->currentLangCode = Yii::$service->fecshoplang->getLangCodeByLanguage($store['language']);
                         Yii::$service->store->currentLangName = $store['languageName'];
+                        
                         Yii::$service->page->translate->setLanguage($store['language']);
                     }
                     if (isset($store['theme']) && !empty($store['theme'])) {

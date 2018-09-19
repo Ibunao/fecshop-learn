@@ -17,12 +17,13 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require(__DIR__ . '/../../vendor/autoload.php');
+// 使用自己扩展的Yii
 require(__DIR__ . '/../../vendor/fancyecommerce/fecshop/yii/Yii.php');
-
+// 设置路径别名
 require(__DIR__ . '/../../common/config/bootstrap.php');
 
 require(__DIR__ . '/../config/bootstrap.php');
-
+// 使用生成的合并的配置文件
 if($use_merge_config_file){
 	$config = require('../merge_config.php');
 }else{
@@ -50,10 +51,11 @@ if($use_merge_config_file){
 		
 	);
 }
-
+// 自己设置，不用yii获取的homeUrl
 $config['homeUrl'] = $homeUrl;
 
 /**
+ * 配置的classMap，自动加载会快一点
  * yii class Map Custom 
  */ 
 $yiiClassMap = yii\helpers\ArrayHelper::merge(
@@ -71,6 +73,10 @@ if(is_array($yiiClassMap) && !empty($yiiClassMap)){
  * 也就是说：除了compoent 和services，其他的用RewriteMap的方式来实现重写
  * 重写的类可以集成被重写的类
  */ 
+/**
+ * 为了后期更改不动原代码
+ * @var [type]
+ */
 $yiiRewriteMap = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/../config/YiiRewriteMap.php'),
     require(__DIR__ . '/../../common/config/YiiRewriteMap.php')

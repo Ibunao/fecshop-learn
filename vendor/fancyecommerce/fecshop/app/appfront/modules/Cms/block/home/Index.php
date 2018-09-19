@@ -46,7 +46,7 @@ class Index
             ];
             $filter['where'] = ['in', 'sku', $skus];
             $products = Yii::$service->product->getProducts($filter);
-            //var_dump($products);
+            var_dump($products);exit;
             $products = Yii::$service->category->product->convertToCategoryInfo($products);
 
             return $products;
@@ -55,19 +55,23 @@ class Index
 
     public function initHead()
     {
+        // 标题
         $home_title = Yii::$app->controller->module->params['home_title'];
+        // 关键词
         $home_meta_keywords = Yii::$app->controller->module->params['home_meta_keywords'];
+        // 描述
         $home_meta_description = Yii::$app->controller->module->params['home_meta_description'];
-
+        // 注册关键词meta标签
         Yii::$app->view->registerMetaTag([
             'name' => 'keywords',
             'content' => Yii::$service->store->getStoreAttrVal($home_meta_keywords, 'home_meta_keywords'),
         ]);
-
+        // 注册描述meta标签
         Yii::$app->view->registerMetaTag([
             'name' => 'description',
             'content' => Yii::$service->store->getStoreAttrVal($home_meta_description, 'home_meta_description'),
         ]);
+        // 设置视图title
         Yii::$app->view->title = Yii::$service->store->getStoreAttrVal($home_title, 'home_title');
     }
 }

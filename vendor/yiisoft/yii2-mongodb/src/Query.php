@@ -319,6 +319,7 @@ class Query extends Component implements QueryInterface
      */
     public function all($db = null)
     {
+        // 如果是模拟执行
         if (!empty($this->emulateExecution)) {
             return [];
         }

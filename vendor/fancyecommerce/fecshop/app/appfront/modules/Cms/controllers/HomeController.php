@@ -14,12 +14,15 @@ class HomeController extends AppfrontController
 
     public function behaviors()
     {
+        // 判断是否满足h5跳转到vueapp的条件
         if (Yii::$service->store->isAppServerMobile()) {
             $urlPath = '';
+            // h5跳转到vueapp
             Yii::$service->store->redirectAppServerMobile($urlPath);
         }
         $behaviors = parent::behaviors();
         $cacheName = 'home';
+        // 判断是否允许缓存
         if (Yii::$service->cache->isEnable($cacheName)) {
             $timeout = Yii::$service->cache->timeout($cacheName);
             $disableUrlParam = Yii::$service->cache->timeout($cacheName);
@@ -32,22 +35,28 @@ class HomeController extends AppfrontController
                     'only' => ['index'],
                 ];
             }
+            // 当前域名
             $store = Yii::$service->store->currentStore;
+            // 当前货币
             $currency = Yii::$service->page->currency->getCurrentCurrency();
+            // yii页面缓存过滤器
             $behaviors[] =  [
                 'enabled' => true,
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
                 'duration' => $timeout,
                 'variations' => [
-                    $store, $currency,
+                    $store, $currency,// 用来区分缓存
                 ],
             ];
         }
         return $behaviors;
     }
     
-    // 网站信息管理
+    /**
+     * 首页
+     * @return [type] [description]
+     */
     public function actionIndex()
     {
         $data = $this->getBlock()->getLastData();

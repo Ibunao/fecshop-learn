@@ -14,6 +14,10 @@ require $dir.'/BaseYii.php';
  */
 class Yii extends \yii\BaseYii
 {
+    /**
+     * 存放服务
+     * @var [type]
+     */
     public static $service;
     /**
      * rewriteMap , like:

@@ -52,6 +52,7 @@ class AppfrontController extends FecController
     }
 
     /**
+     * 获取action对应的block
      * @property $blockName | String
      * get current block
      * 这个函数的controller中得到block文件，譬如：

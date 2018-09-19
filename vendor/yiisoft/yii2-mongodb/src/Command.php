@@ -260,7 +260,7 @@ class Command extends BaseObject
     public function query($collectionName, $options = [])
     {
         $databaseName = $this->databaseName === null ? $this->db->defaultDatabaseName : $this->databaseName;
-
+        // 记录执行的mongo语句
         $token = $this->log(
             'find',
             array_merge(
@@ -798,6 +798,14 @@ class Command extends BaseObject
     // Logging :
 
     /**
+     * 记录执行的mongo语句
+     * 例子：
+     * find({"ns":"fecshop_test.product_flat","filter":{"$and":[{"sku":{"$in":["men0003","men0002","men0001","computer001-xinghao2-cpu3","22221","sk10005","sk1000-khak","222212"]}},{"status":1}]},"projection":{"sku":true,"spu":true,"name":true,"image":true,"price":true,"special_price":true,"special_from":true,"special_to":true,"url_key":true,"score":true}})
+     *
+     * 1. "ns":"fecshop_test.product_flat" 数据库是fecshop_test 集合是product_flat
+     * 2. "filter":{"$and":[{"sku":{"$in":["men0003","men0002","men0001","computer001-xinghao2-cpu3","22221","sk10005","sk1000-khak","222212"]}},{"status":1}]} 执行的查询条件
+     * 3. "projection":{"sku":true,"spu":true,"name":true,"image":true,"price":true,"special_price":true,"special_from":true,"special_to":true,"url_key":true,"score":true} 查询的字段
+     * 
      * Logs the command data if logging is enabled at [[db]].
      * @param array|string $namespace command namespace.
      * @param array $data command data.
