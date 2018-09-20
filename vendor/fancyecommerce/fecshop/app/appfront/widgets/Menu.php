@@ -7,6 +7,10 @@ use Yii;
 
 class Menu implements BlockCache
 {
+    /**
+     * 获取视图需要的数据
+     * @return [type] [description]
+     */
     public function getLastData()
     {
         $categoryArr = Yii::$service->page->menu->getMenuData();

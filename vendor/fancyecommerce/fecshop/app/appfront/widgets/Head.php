@@ -13,7 +13,10 @@ class Head implements BlockCache
 
         ];
     }
-
+    /**
+     * 获取缓存的key
+     * @return [type] [description]
+     */
     public function getCacheKey()
     {
         $store = Yii::$service->store->currentLangCode;

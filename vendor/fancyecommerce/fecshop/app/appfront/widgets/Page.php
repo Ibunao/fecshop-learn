@@ -21,7 +21,10 @@ class Page
     public $numPerPage;
     public $countTotal;
     public $page;
-
+    /**
+     * 获取视图需要的参数
+     * @return [type] [description]
+     */
     public function getLastData()
     {
         $spaceShowNum = 4;

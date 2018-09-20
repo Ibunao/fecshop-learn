@@ -27,7 +27,11 @@ class Service extends BaseObject
     protected $_beginCallTime;
     protected $_beginCallCode;
     protected $_callFuncLog;
-
+    /**
+     * 通过属性的形式获取子service对象
+     * @param  [type] $attr [description]
+     * @return [type]       [description]
+     */
     public function __get($attr)
     {
         return $this->getChildService($attr);

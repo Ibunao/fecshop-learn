@@ -73,6 +73,7 @@ class Widget extends Service
      */
     protected function actionRenderContentHtml($configKey, $config, $parentThis = '')
     {
+        // 配置的视图
         if (!isset($config['view']) || empty($config['view'])
         ) {
             throw new InvalidConfigException('view and class must exist in array config!');
@@ -81,6 +82,7 @@ class Widget extends Service
         $view = $config['view'];
         unset($config['view']);
         $viewFile = $this->getViewFile($view);
+        // 不需要参数的，也就没设置class，直接渲染视图
         if (!isset($config['class']) || empty($config['class'])) {
             if ($parentThis) {
                 $params['parentThis'] = $parentThis;
@@ -95,6 +97,7 @@ class Widget extends Service
             $method = $this->defaultObMethod;
         }
         $ob = Yii::createObject($config);
+        // 这个来获取小部件的参数
         $params = $ob->$method();
         if ($parentThis) {
             $params['parentThis'] = $parentThis;
@@ -110,11 +113,14 @@ class Widget extends Service
      */
     protected function actionRenderContent($configKey, $config, $parentThis = '')
     {
+        // 如果用缓存
         if (isset($config['cache']['enable']) && $config['cache']['enable']) {
             if (!isset($config['class']) || !$config['class']) {
                 throw new InvalidConfigException('in widget ['.$configKey.'],you enable cache ,you must config widget class .');
+            //- 这一步也可以添加 $config['class'] = Yii::mapGetClassName($config['class']); 来获取重写的class
             } elseif ($ob = new $config['class']()) {
                 if ($ob instanceof BlockCache) {
+                    // 获取缓存的key
                     $cacheKey = $ob->getCacheKey();
                     if (!($content = CCache::get($cacheKey))) {
                         $cache = $config['cache'];

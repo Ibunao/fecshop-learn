@@ -157,8 +157,8 @@ return
     'controllerNamespace'=>'appfront\controllers',
     'params'=>
     [
-        'appfrontBaseTheme'=>'@fecshop/app/appfront/theme/base/front',
-        'appfrontBaseLayoutName'=>'main.php',
+        'appfrontBaseTheme'=>'@fecshop/app/appfront/theme/base/front', # fecshop自带的模板路径
+        'appfrontBaseLayoutName'=>'main.php', # layout文件配置
         'appName'=>'appfront',
     ],
     'bootstrap'=>

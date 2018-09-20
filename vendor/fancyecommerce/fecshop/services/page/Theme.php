@@ -75,6 +75,7 @@ class Theme extends Service
     protected function actionGetViewFile($view, $throwError = true)
     {
         $view = trim($view);
+        // 如果是别名的形式，直接获取
         if (substr($view, 0, 1) == '@') {
             return Yii::getAlias($view);
         }
@@ -83,6 +84,7 @@ class Theme extends Service
         if ($module && $module->id) {
             $relativeFile = $module->id.'/';
         }
+        // 根据module和controller来确定相对位置
         $relativeFile .= Yii::$app->controller->id.'/'.$view.'.php';
         $absoluteDir = Yii::$service->page->theme->getThemeDirArr();
         foreach ($absoluteDir as $dir) {
