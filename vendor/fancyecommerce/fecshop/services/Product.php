@@ -41,6 +41,7 @@ class Product extends Service
     public function init()
     {
         parent::init();
+        // 通过配置的storage来找到对应的类
         $currentService = $this->getStorageService($this);
         $this->_product = new $currentService();
         /*

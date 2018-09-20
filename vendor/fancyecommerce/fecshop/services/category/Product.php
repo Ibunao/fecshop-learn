@@ -87,9 +87,11 @@ class Product extends Service
     protected function actionConvertToCategoryInfo($collection)
     {
         $arr = [];
+        // 商品的默认图片
         $defaultImg = Yii::$service->product->image->defautImg();
         if (is_array($collection) && !empty($collection)) {
             foreach ($collection as $one) {
+                // 如果有多个名字就匹配出当前语言的那个名字
                 if (is_array($one['name']) && !empty($one['name'])) {
                     $name = Yii::$service->store->getStoreAttrVal($one['name'], 'name');
                 } else {
@@ -102,6 +104,7 @@ class Product extends Service
                 } else {
                     $image = $defaultImg;
                 }
+                // 获取价格和活动价格
                 list($price, $special_price) = $this->getPrices($one['price'], $one['special_price'], $one['special_from'], $one['special_to']);
                 $arr[] = [
                     'name'          => $name,

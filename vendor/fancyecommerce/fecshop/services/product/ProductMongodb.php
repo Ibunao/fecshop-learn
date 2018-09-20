@@ -23,8 +23,8 @@ class ProductMongodb extends Service implements ProductInterface
     public $numPerPage = 20;
     
     
-    protected $_productModelName = '\fecshop\models\mongodb\Product';
-    protected $_productModel;
+    protected $_productModelName = '\fecshop\models\mongodb\Product'; # 使用的model类
+    protected $_productModel; # module对象
     
     public function init(){
         parent::init();

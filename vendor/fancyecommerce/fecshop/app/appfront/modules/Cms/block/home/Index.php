@@ -45,6 +45,7 @@ class Index
                 'url_key', 'score',
             ];
             $filter['where'] = ['in', 'sku', $skus];
+            // 根据条件获取产品
             $products = Yii::$service->product->getProducts($filter);
             // var_dump($products);exit;
             $products = Yii::$service->category->product->convertToCategoryInfo($products);

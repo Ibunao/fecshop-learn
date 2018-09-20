@@ -37,12 +37,13 @@ class AppfrontController extends FecController
             Yii::$service->page->theme->fecshopThemeDir = Yii::getAlias(CConfig::param('appfrontBaseTheme'));
         }
         /**
-         * 如果layout文件没有配置，则配置layout文件
+         * 如果layout文件没有配置，则配置layout文件，module文件可能会进行指定
          */
         if (!Yii::$service->page->theme->layoutFile) {
             Yii::$service->page->theme->layoutFile = CConfig::param('appfrontBaseLayoutName');
         }
-        /*
+        /**
+         * 
          *  set i18n translate category.
          */
         Yii::$service->page->translate->category = 'appfront';
@@ -76,7 +77,7 @@ class AppfrontController extends FecController
         $viewId = str_replace('/', '\\', $viewId);
         $relativeFile = '\\'.$this->blockNamespace;
         $relativeFile .= '\\'.$viewId.'\\'.ucfirst($blockName);
-        //查找是否在rewriteMap中存在重写
+        // 查找是否在rewriteMap中存在重写
         $relativeFile = Yii::mapGetName($relativeFile);
         
         return new $relativeFile();

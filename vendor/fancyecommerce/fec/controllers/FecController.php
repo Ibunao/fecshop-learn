@@ -16,8 +16,7 @@ use yii\web\Controller;
  */
 class FecController extends Controller
 {
-	# 
-   public function getBlock($blockname=''){
+    public function getBlock($blockname=''){
 	    $_currentNameSpace = \fec\helpers\CModule::param("_currentNameSpace");
 		if(empty($_currentNameSpace)){
 			$message = "Modules Param '_currentNameSpace'  is not set , you can set like fecadmin\\Module";

@@ -48,7 +48,9 @@ $cssOptions = [
 <?= Yii::$service->page->widget->render('beforeContent',$this); ?>
 <?php $this->beginBody() ?>
 	<header id="header">
+		<!-- 渲染header部分 -->
 		<?= Yii::$service->page->widget->render('header',$this); ?>
+		<!-- 菜单 -->
 		<?= Yii::$service->page->widget->render('menu',$this); ?>
 	</header>
     
@@ -56,9 +58,11 @@ $cssOptions = [
 		<?= $content; ?>
 	</div>
 	<div class="footer-container">
+		<!-- 底部 -->
 		<?= Yii::$service->page->widget->render('footer',$this); ?>
 	</div>
     <?= Yii::$service->page->widget->render('trace',$this); ?>
+    <!-- 右边小按钮，回顶部或底部的 -->
 	<?= Yii::$service->page->widget->render('scroll',$this); ?>
 <?php $this->endBody() ?>
 </body>
