@@ -95,7 +95,7 @@ class AppfrontController extends FecController
     {
         $viewFile = Yii::$service->page->theme->getViewFile($view);
         $content = Yii::$app->view->renderFile($viewFile, $params, $this);
-
+        // 将会挟带layout
         return $this->renderContent($content);
     }
 
@@ -115,7 +115,7 @@ class AppfrontController extends FecController
                 $file = $dir.'/'.$relativeFile;
                 if (file_exists($file)) {
                     $layoutFile = $file;
-
+var_dump($layoutFile);exit;
                     return $layoutFile;
                 }
             }
