@@ -7,9 +7,15 @@ use Yii;
 
 class Headers implements BlockCache
 {
+    /**
+     * 获取渲染需要的数据
+     * @return [type] [description]
+     */
     public function getLastData()
     {
+        // 获取当前的url
         $currentUrl = Yii::$service->url->getCurrentUrl();
+        // 获取退出的url
         $logoutUrl = Yii::$service->url->getUrl('customer/account/logout', ['rt'=>base64_encode($currentUrl)]);
 
         //$currentLang =

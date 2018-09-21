@@ -57,6 +57,7 @@ class Staticblock extends Service
      */
     protected function actionGetStoreContentByIdentify($identify, $app = 'common')
     {
+        // 获取静态块
         $staticBlock    = $this->_static_block->getByIdentify($identify);
         $content        = $staticBlock['content'];
         $storeContent   = Yii::$service->store->getStoreAttrVal($content, 'content');

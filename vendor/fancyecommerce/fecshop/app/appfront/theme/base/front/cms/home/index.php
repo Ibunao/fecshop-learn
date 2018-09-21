@@ -8,6 +8,7 @@
  */
 ?>
 <div class="main container">
+	<!-- 轮播和主题块 -->
 	<?=  Yii::$service->cms->staticblock->getStoreContentByIdentify('home-big-img','appfront') ?>
 	<div class="mt10">
 		<h4 class="sectionBox_h best_seller"><span><?= Yii::$service->page->translate->__('best seller'); ?></span><em><a href=""><?= Yii::$service->page->translate->__('more'); ?></a></em></h4>

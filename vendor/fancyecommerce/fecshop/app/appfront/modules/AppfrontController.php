@@ -116,7 +116,7 @@ class AppfrontController extends FecController
                 $file = $dir.'/'.$relativeFile;
                 if (file_exists($file)) {
                     $layoutFile = $file;
-var_dump($layoutFile);exit;
+// var_dump($layoutFile);exit;
                     return $layoutFile;
                 }
             }
