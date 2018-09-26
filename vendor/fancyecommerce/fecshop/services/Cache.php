@@ -26,6 +26,7 @@ class Cache extends Service
     public $enable;
 
     /**
+     * 是否允许使用缓存
      * @property $cacheKey | String , 具体的缓存名字，譬如 product  category
      * @return boolean, 如果enable为true，则返回为true
      * 根据传递的$cacheKey，从配置中读取是否开启cache

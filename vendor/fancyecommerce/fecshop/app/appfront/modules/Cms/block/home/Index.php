@@ -53,7 +53,10 @@ class Index
             return $products;
         }
     }
-
+    /**
+     * 注册html中的meta标签
+     * @return [type] [description]
+     */
     public function initHead()
     {
         // 标题

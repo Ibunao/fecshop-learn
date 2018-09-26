@@ -1,7 +1,8 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE & ~E_COMPILE_WARNING ); //除去 E_NOTICE E_COMPILE_WARNING 之外的所有错误信息
+error_reporting(E_ALL & ~E_NOTICE & ~E_COMPILE_WARNING ); //除去 E_NOTICE E_COMPILE_WARNING 之外的所有错误信息, 不显示E_NOTICE E_COMPILE_WARNING 错误
 //ini_set('session.cookie_domain', '.fancyecommerce.com'); //初始化域名，共享session
 $http = ($_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
+// 获取入口文件目录，看web/fr/index
 $homeUrl = $http.'://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']), '\\/');
 // echo $homeUrl;exit;
 /**

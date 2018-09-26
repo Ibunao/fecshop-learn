@@ -165,7 +165,8 @@ return
     [
         0=>'debug',
         1=>'gii',
-        2=>'store',// 预先加载store
+        // 预先加载store, 执行store的Bootstrap方法
+        2=>'store',
     ],
     'modules'=>
     [
@@ -736,6 +737,7 @@ return
         'fecshoplang'=>
         [
             'class'=>'fecshop\services\FecshopLang',
+            // 语言缩写对应的简码
             'allLangCode'=>
             [
                 'en_US'=>
@@ -913,6 +915,7 @@ return
                     'baseUrl'=>'@web/assets',
                     'forceCopy'=>true,
                 ],
+                // 主题
                 'theme'=>
                 [
                     'class'=>'fecshop\services\page\Theme',

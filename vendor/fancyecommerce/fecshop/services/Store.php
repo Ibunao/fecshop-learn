@@ -100,17 +100,22 @@ class Store extends Service
                     $this->html5DevideCheckAndRedirect($store_code, $store);
                     Yii::$service->store->currentStore = $store_code;
                     $this->store = $store;
+                    // 设置语言
                     if (isset($store['language']) && !empty($store['language'])) {
                         Yii::$service->store->currentLang = $store['language'];
+                        // 获取语言简码
                         Yii::$service->store->currentLangCode = Yii::$service->fecshoplang->getLangCodeByLanguage($store['language']);
+                        // 语言名
                         Yii::$service->store->currentLangName = $store['languageName'];
-                        
+                        // 设置当前语言 Yii::$app->language
                         Yii::$service->page->translate->setLanguage($store['language']);
                     }
-                    if (isset($store['theme']) && !empty($store['theme'])) {
-                        Yii::$service->store->currentTheme = $store['theme'];
-                    }
-                    /*
+                    // 作者已经注释掉相关属性，这段代码也无用了
+                    // if (isset($store['theme']) && !empty($store['theme'])) {
+                    //     Yii::$service->store->currentTheme = $store['theme'];
+                    // }
+                    /**
+                     * 是指本地主题路径
                      * set local theme dir.
                      */
                     if (isset($store['localThemeDir']) && $store['localThemeDir']) {
@@ -124,7 +129,8 @@ class Store extends Service
                         //Yii::$service->page->theme->thirdThemeDir = $store['thirdThemeDir'];
                         Yii::$service->page->theme->setThirdThemeDir($store['thirdThemeDir']);
                     }
-                    /*
+                    /**
+                     * 设置货币
                      * init store currency.
                      */
                     if (isset($store['currency']) && !empty($store['currency'])) {
@@ -138,6 +144,7 @@ class Store extends Service
                      */
                     $init_compelte = 1;
                     $this->thirdLogin = $store['thirdLogin'];
+                    
                     /**
                      * appserver 部分
                      */

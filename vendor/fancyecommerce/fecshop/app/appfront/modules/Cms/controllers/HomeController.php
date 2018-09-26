@@ -24,8 +24,9 @@ class HomeController extends AppfrontController
         $cacheName = 'home';
         // 判断是否允许缓存
         if (Yii::$service->cache->isEnable($cacheName)) {
+            // 配置的缓存时间
             $timeout = Yii::$service->cache->timeout($cacheName);
-            $disableUrlParam = Yii::$service->cache->timeout($cacheName);
+            $disableUrlParam = Yii::$service->cache->disableUrlParam($cacheName);
             $get = Yii::$app->request->get();
             // 存在无缓存参数，则关闭缓存
             if (isset($get[$disableUrlParam])) {
