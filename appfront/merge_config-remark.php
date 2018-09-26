@@ -828,14 +828,18 @@ return
                 ],
             ],
         ],
+        // 设置图片路径
         'image'=>
         [
             'class'=>'fecshop\services\Image',
             'appbase'=>
             [
+                // pc前端
                 'appfront'=>
                 [
+                    // 基础路径
                     'basedir'=>'@appimage/appfront',
+                    // 基础url    
                     'basedomain'=>'//img3.fecshoptest.com',
                 ],
                 'apphtml5'=>

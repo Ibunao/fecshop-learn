@@ -306,6 +306,7 @@ class Store extends Service
     }
 
     /**
+     * 获取字段当前store对应的字段名
      * @property $attrVal|array , language attr array , like   ['title_en' => 'xxxx','title_fr' => 'yyyy']
      * @property $attrName|String, attribute name ,like: title ,description.
      * if  object or array  attribute is a language attribute, you can get current

@@ -93,12 +93,14 @@ class Product extends Service
             foreach ($collection as $one) {
                 // 如果有多个名字就匹配出当前语言的那个名字
                 if (is_array($one['name']) && !empty($one['name'])) {
+                    // 获取当前字段当前store对应的字段名
                     $name = Yii::$service->store->getStoreAttrVal($one['name'], 'name');
                 } else {
                     $name = $one['name'];
                 }
                 $image = $one['image'];
                 $url_key = $one['url_key'];
+                // 如果没有主图则使用默认图片
                 if (isset($image['main']['image']) && !empty($image['main']['image'])) {
                     $image = $image['main']['image'];
                 } else {
@@ -109,6 +111,7 @@ class Product extends Service
                 $arr[] = [
                     'name'          => $name,
                     'sku'           => $one['sku'],
+                    // 没这个字段
                     '_id'           => (string)$one['product_id'],
                     'image'         => $image,
                     'price'         => $price,

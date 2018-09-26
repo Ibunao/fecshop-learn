@@ -8,7 +8,7 @@
  */
 ?>
 <div class="main container">
-	<!-- 轮播和主题块 -->
+	<!-- 轮播和主题块 静态块 -->
 	<?=  Yii::$service->cms->staticblock->getStoreContentByIdentify('home-big-img','appfront') ?>
 	<div class="mt10">
 		<h4 class="sectionBox_h best_seller"><span><?= Yii::$service->page->translate->__('best seller'); ?></span><em><a href=""><?= Yii::$service->page->translate->__('more'); ?></a></em></h4>
@@ -78,4 +78,5 @@ $(document).ready(function(){
 });
 <?php $this->endBlock(); ?>  
 </script>  
+<!-- 先存到block，再注册，避免了麻烦的字符串 -->
 <?php $this->registerJs($this->blocks['owl_fecshop_slider'],\yii\web\View::POS_END);//将编写的js代码注册到页面底部 ?>

@@ -16,7 +16,9 @@ class Index
         // change current layout File.
         //Yii::$service->page->theme->layoutFile = 'home.php';
         return [
+            // 主打产品
             'bestFeaturedProducts'     => $this->getFeaturedProduct(),
+            // 热卖产品
             'bestSellerProducts'    => $this->getBestSellerProducts(),
         ];
     }
@@ -47,9 +49,8 @@ class Index
             $filter['where'] = ['in', 'sku', $skus];
             // 根据条件获取产品
             $products = Yii::$service->product->getProducts($filter);
-            // var_dump($products);exit;
             $products = Yii::$service->category->product->convertToCategoryInfo($products);
-
+            // var_dump($products);exit;
             return $products;
         }
     }
