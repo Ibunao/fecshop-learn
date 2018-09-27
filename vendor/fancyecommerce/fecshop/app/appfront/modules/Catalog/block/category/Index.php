@@ -54,6 +54,7 @@ class Index
         $this->getNumPerPage();
         //echo Yii::$service->page->translate->__('fecshop,{username}', ['username' => 'terry']);
         if(!$this->initCategory()){
+            // 跳转到404
             Yii::$service->url->redirect404();
             return;
         }
@@ -211,6 +212,7 @@ class Index
     protected function getFilterAttr()
     {
         if (!$this->_filter_attr) {
+            // 默认配置
             $filter_default = Yii::$app->controller->module->params['category_filter_attr'];
             $current_fileter_select = $this->_category['filter_product_attr_selected'];
             $current_fileter_unselect = $this->_category['filter_product_attr_unselected'];
@@ -427,14 +429,18 @@ class Index
                 'url_key', 'score',
             ];
         $category_query = Yii::$app->getModule('catalog')->params['category_query'];
+        // 因为要排序，所以要把排序的字段加到select中
         if (is_array($category_query['sort'])) {
             foreach ($category_query['sort'] as $sort_item) {
                 $select[] = $sort_item['db_columns'];
             }
         }
         $filter = [
+            // 第几页
             'pageNum'      => $this->getPageNum(),
+            // 每页条数
             'numPerPage'  => $this->getNumPerPage(),
+            // 排序条件
             'orderBy'      => $this->getOrderBy(),
             'where'          => $this->_where,
             'select'      => $select,
@@ -447,6 +453,7 @@ class Index
      */
     protected function initWhere()
     {
+        // 属性条件
         $filterAttr = $this->getFilterAttr();
         foreach ($filterAttr as $attr) {
             $attrUrlStr = Yii::$service->url->category->attrValConvertUrlStr($attr);
@@ -456,12 +463,15 @@ class Index
                 $where[$attr] = $val;
             }
         }
+        // 金额条件
         $filter_price = Yii::$app->request->get($this->_filterPrice);
         list($f_price, $l_price) = explode('-', $filter_price);
         if ($f_price == '0' || $f_price) {
+            // mongo使用大于等于的条件
             $where[$this->_filterPriceAttr]['$gte'] = (float) $f_price;
         }
         if ($l_price) {
+            // mongo使用小于等于的条件
             $where[$this->_filterPriceAttr]['$lte'] = (float) $l_price;
         }
         $where['category'] = $this->_primaryVal;
@@ -502,6 +512,7 @@ class Index
         ]);
         $this->_title = Yii::$service->store->getStoreAttrVal($category['title'], 'title');
         $name = Yii::$service->store->getStoreAttrVal($category['name'], 'name');
+        // 注册面包屑导航
         $this->breadcrumbs($name);
         $this->_title = $this->_title ? $this->_title : $name;
         Yii::$app->view->title = $this->_title;
