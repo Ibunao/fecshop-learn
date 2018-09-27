@@ -24,6 +24,7 @@ use yii\base\InvalidConfigException;
 class Request extends \yii\web\Request
 {
     /**
+     * 路由重写放在这里了，而不是使用rule
      * rewrite yii\web\Request  resolveRequestUri().
      */
     protected function resolveRequestUri()

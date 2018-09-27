@@ -64,7 +64,10 @@ class HomeController extends AppfrontController
         return $this->render($this->action->id, $data);
     }
 
-
+    /**
+     * 更改货币类型
+     * @return [type] [description]
+     */
     public function actionChangecurrency()
     {
         $currency = \fec\helpers\CRequest::param('currency');

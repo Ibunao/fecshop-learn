@@ -383,13 +383,16 @@ class Index
         if (!$this->_numPerPageVal) {
             $numPerPage = Yii::$app->request->get($this->_numPerPage);
             $category_query_config = Yii::$app->getModule('catalog')->params['category_query'];
+            // 如果请求参数没有设置分页大小，则使用默认的
             if (!$numPerPage) {
                 if (isset($category_query_config['numPerPage'])) {
                     if (is_array($category_query_config['numPerPage'])) {
                         $this->_numPerPageVal = $category_query_config['numPerPage'][0];
                     }
                 }
+            // 如果  -- 这个判断多余
             } elseif (!$this->_numPerPageVal) {
+                // 如果请求参数设置了分页的大小，如果不符合配置的，视为攻击
                 if (isset($category_query_config['numPerPage']) && is_array($category_query_config['numPerPage'])) {
                     $numPerPageArr = $category_query_config['numPerPage'];
                     if (in_array((int) $numPerPage, $numPerPageArr)) {
@@ -474,6 +477,8 @@ class Index
         $primaryKey = Yii::$service->category->getPrimaryKey();
         $primaryVal = Yii::$app->request->get($primaryKey);
         $this->_primaryVal = $primaryVal;
+        // 根据_id查询分类
+        // db.getCollection('category').find({_id:ObjectId("57b6affff656f25a523bf57d")})
         $category = Yii::$service->category->getByPrimaryKey($primaryVal);
         if ($category) {
             $enableStatus = Yii::$service->category->getCategoryEnableStatus();
@@ -486,6 +491,7 @@ class Index
             return false;
         }
         $this->_category = $category;
+        // 注册mate标签
         Yii::$app->view->registerMetaTag([
             'name' => 'keywords',
             'content' => Yii::$service->store->getStoreAttrVal($category['meta_keywords'], 'meta_keywords'),
@@ -506,6 +512,7 @@ class Index
     // 面包屑导航
     protected function breadcrumbs($name)
     {
+        // 如果分类使用面包屑导航
         if (Yii::$app->controller->module->params['category_breadcrumbs']) {
             $parent_info = Yii::$service->category->getAllParentInfo($this->_category['parent_id']);
             if (is_array($parent_info) && !empty($parent_info)) {

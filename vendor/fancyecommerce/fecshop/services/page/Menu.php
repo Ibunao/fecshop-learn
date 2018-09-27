@@ -44,6 +44,7 @@ class Menu extends Service
     {
         $this->_homeUrl = CUrl::getHomeUrl();
         $arr = [];
+        // 分类是否显示首页
         if ($displayHome = $this->displayHome) {
             $enable = isset($displayHome['enable']) ? $displayHome['enable'] : '';
             $display = isset($displayHome['display']) ? $displayHome['display'] : '';
@@ -54,12 +55,14 @@ class Menu extends Service
                 ];
             }
         }
+        // 自定义目录
         $first_custom_menu = $this->customMenuInit($this->frontCustomMenu);
         if (is_array($first_custom_menu) && !empty($first_custom_menu)) {
             foreach ($first_custom_menu as $m) {
                 $arr[] = $m;
             }
         }
+        // 产品分类目录
         $categoryMenuArr = $this->getProductCategoryMenu();
         //var_dump($categoryMenuArr);
         if (is_array($categoryMenuArr) && !empty($categoryMenuArr)) {
@@ -67,7 +70,7 @@ class Menu extends Service
                 $arr[] = $a;
             }
         }
-
+        // 自定义目录
         $behind_custom_menu = $this->customMenuInit($this->behindCustomMenu);
         if (is_array($behind_custom_menu) && !empty($behind_custom_menu)) {
             foreach ($behind_custom_menu as $m) {

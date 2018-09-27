@@ -53,6 +53,7 @@ class Session extends Service
     public function init()
     {
         parent::init();
+        // 如果允许使用session，则使用session存储
         if(\Yii::$app->user->enableSession == true){
             $this->_session = new SessionPhp; // phpsession
         }else {

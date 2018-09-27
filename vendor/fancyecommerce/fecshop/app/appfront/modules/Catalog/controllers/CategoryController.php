@@ -13,6 +13,7 @@ use fecshop\app\appfront\modules\AppfrontController;
 use Yii;
 
 /**
+ * 分类
  * @author Terry Zhao <2358269014@qq.com>
  * @since 1.0
  */
@@ -21,6 +22,7 @@ class CategoryController extends AppfrontController
     public function init()
     {
         parent::init();
+        // 设置layout文件
         Yii::$service->page->theme->layoutFile = 'category_view.php';
     }
 
@@ -38,7 +40,7 @@ class CategoryController extends AppfrontController
      */
     public function behaviors()
     {
-        // 检测手机设备，vue跳转
+        // 检测手机设备，vue跳转 
         if (Yii::$service->store->isAppServerMobile()) {
             $primaryKey = Yii::$service->category->getPrimaryKey();
             $primaryVal = Yii::$app->request->get($primaryKey);
