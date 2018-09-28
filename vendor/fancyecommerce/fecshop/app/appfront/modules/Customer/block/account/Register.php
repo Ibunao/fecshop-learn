@@ -37,7 +37,11 @@ class Register
             'registerPageCaptcha' => $registerPageCaptcha,
         ];
     }
-
+    /**
+     * 注册
+     * @param  [type] $param [description]
+     * @return [type]        [description]
+     */
     public function register($param)
     {
         $captcha = $param['captcha'];
@@ -48,11 +52,13 @@ class Register
             Yii::$service->page->message->addError(['Captcha can not empty']);
 
             return;
+        // 验证验证码
         } elseif ($captcha && $registerPageCaptcha && !\Yii::$service->helper->captcha->validateCaptcha($captcha)) {
             Yii::$service->page->message->addError(['Captcha is not right']);
 
             return;
         }
+        // 注册
         Yii::$service->customer->register($param);
         
         $errors = Yii::$service->page->message->addByHelperErrors();

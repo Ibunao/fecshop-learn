@@ -19,7 +19,7 @@ use Yii;
 class AccountController extends AppfrontController
 {
     //protected $_registerSuccessRedirectUrlKey = 'customer/account';
-
+    // 不使用csrf验证
     public $enableCsrfValidation = false;
 
     public function init()
@@ -69,15 +69,19 @@ class AccountController extends AppfrontController
      */
     public function actionRegister()
     {
+        // 判断是否h5跳转到vue
         if (Yii::$service->store->isAppServerMobile()) {
             $urlPath = 'customer/account/register';
             Yii::$service->store->redirectAppServerMobile($urlPath);
         }
+        // 已登录则跳转
         if (!Yii::$app->user->isGuest) {
             return Yii::$service->url->redirectByUrlKey('customer/account');
         }
+        // 提交表单
         $param = Yii::$app->request->post('editForm');
         if (!empty($param) && is_array($param)) {
+            // 过滤，防止xss
             $param = \Yii::$service->helper->htmlEncode($param);
             $registerStatus = $this->getBlock()->register($param);
             //echo $registerStatus;exit;

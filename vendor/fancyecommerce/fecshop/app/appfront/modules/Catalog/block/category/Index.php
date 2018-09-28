@@ -63,7 +63,9 @@ class Index
         //Yii::$service->page->theme->layoutFile = 'home.php';
 
         $productCollInfo = $this->getCategoryProductColl();
+        // 查到的产品
         $products = $productCollInfo['coll'];
+        // 查到的总数
         $this->_productCount = $productCollInfo['count'];
         //echo $this->_productCount;
         return [

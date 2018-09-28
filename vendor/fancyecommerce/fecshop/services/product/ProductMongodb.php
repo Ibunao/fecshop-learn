@@ -621,6 +621,7 @@ class ProductMongodb extends Service implements ProductInterface
         $product_data = $this->_productModel->getCollection()->aggregate($pipelines);
         $product_total_count = count($product_data);
         $pageOffset = ($pageNum - 1) * $numPerPage;
+        // 截取查询出的结果而不直接用mongo的分页???
         $products = array_slice($product_data, $pageOffset, $numPerPage);
 
         return [

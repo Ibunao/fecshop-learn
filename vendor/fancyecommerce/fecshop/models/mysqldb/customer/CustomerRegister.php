@@ -60,7 +60,12 @@ class CustomerRegister extends Customer
             $this->is_subscribed = 2;
         }
     }
-
+    /**
+     * 验证邮箱
+     * @param  [type] $attribute [description]
+     * @param  [type] $params    [description]
+     * @return [type]            [description]
+     */
     public function validateEmail($attribute, $params)
     {
         if ($this->id) {
@@ -88,7 +93,7 @@ class CustomerRegister extends Customer
         }
     }
 
-    // 重写保存方法
+    // 重写保存方法，生成一些密码需要的值
     public function save($runValidation = true, $attributeNames = null)
     {
         // 如果password为空，则return

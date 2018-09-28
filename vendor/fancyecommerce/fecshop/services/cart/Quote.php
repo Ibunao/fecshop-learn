@@ -485,6 +485,7 @@ class Quote extends Service
      */
     public function mergeCartAfterUserLogin()
     {
+        // 如果登录的进行合并购物车
         if (!Yii::$app->user->isGuest) {
             $identity           = Yii::$app->user->identity;
             $customer_id        = $identity['id'];
@@ -494,6 +495,7 @@ class Quote extends Service
             $customer_cart      = $this->getCartByCustomerId($customer_id);
             $cart_id            = $this->getCartId();
             if (!$customer_cart) {
+                // 新建购物车
                 if ($cart_id) {
                     $cart = $this->getCart();
                     if ($cart) {

@@ -120,7 +120,9 @@ class Customer extends Service
     protected function actionRegister($param)
     {
         $model = new $this->_customerRegisterModelName();
+        // 批量赋值
         $model->attributes = $param;
+        // 验证
         if ($model->validate()) {
             $model->created_at = time();
             $model->updated_at = time();
@@ -134,7 +136,7 @@ class Customer extends Service
             if ($param['is_subscribed'] == 1) {
                 Yii::$service->customer->newsletter->subscribe($param['email'], true);
             }
-            
+            // ??? 为了什么
             // 发送注册信息到trace系统
             Yii::$service->page->trace->sendTraceRegisterInfoByApi($model->email);
             return true;

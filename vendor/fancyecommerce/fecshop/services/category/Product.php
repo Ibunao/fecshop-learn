@@ -111,7 +111,7 @@ class Product extends Service
                 $arr[] = [
                     'name'          => $name,
                     'sku'           => $one['sku'],
-                    // 没这个字段
+                    //                  没这个字段
                     '_id'           => (string)$one['product_id'],
                     'image'         => $image,
                     'price'         => $price,

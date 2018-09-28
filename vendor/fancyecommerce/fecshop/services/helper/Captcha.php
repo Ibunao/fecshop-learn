@@ -12,6 +12,7 @@ namespace fecshop\services\helper;
 use fecshop\services\Service;
 
 /**
+ * 生成验证码
  * Helper Captcha services. 验证码部分
  * @author Terry Zhao <2358269014@qq.com>
  * @since 1.0
