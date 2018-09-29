@@ -20,6 +20,7 @@ class Index
     public function getLastData()
     {
         $this->initHead();
+        // 获取汇率，根据这个计算不同币种的金额
         $currency_info = Yii::$service->page->currency->getCurrencyInfo();
         $cart_info = $this->getCartInfo(false);
         //var_dump($cart_info );

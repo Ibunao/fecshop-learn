@@ -40,7 +40,7 @@ class Review
         // 这个是是否通过语言进行过滤评论，可以通过上面的函数 self::initReviewConfig进行初始化，
         // 也就是通过当前模块的配置，来覆盖service的配置
         $filterByLang = Yii::$service->product->review->filterByLang;
-        
+        // 只显示本语言下的评论/评价
         if ($filterByLang) {
             $langCode = Yii::$service->store->currentLangCode;
             if ($langCode) {

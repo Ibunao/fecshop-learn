@@ -60,24 +60,34 @@ class Index
             return;
         }
         $reviewHelper::initReviewConfig();
+        // 评价总数         平均分                      分数对应的人数
         list($review_count, $reviw_rate_star_average, $reviw_rate_star_info) = $reviewHelper::getReviewAndStarCount($this->_product);
         
         $this->filterProductImg($this->_product['image']);
         $groupAttrInfo = Yii::$service->product->getGroupAttrInfo($this->_product['attr_group']);
         $groupAttrArr = $this->getGroupAttrArr($groupAttrInfo);
         return [
+            // 产品描述 规格部分
             'groupAttrArr'              => $groupAttrArr,
+            // 商品名
             'name'                      => Yii::$service->store->getStoreAttrVal($this->_product['name'], 'name'),
             'image_thumbnails'          => $this->_image_thumbnails,
+            // 产品描述 图片详情部分
             'image_detail'              => $this->_image_detail,
             'sku'                       => $this->_product['sku'],
+            // 倍数购买
             'package_number'            => $this->_product['package_number'],
+            // 产品编号
             'spu'                       => $this->_product['spu'],
             'attr_group'                => $this->_product['attr_group'],
+            // 评论数
             'review_count'              => $review_count,
+            // 平均分
             'reviw_rate_star_average'   => $reviw_rate_star_average,
             'reviw_rate_star_info'      => $reviw_rate_star_info,
+            // 价格信息
             'price_info'                => $this->getProductPriceInfo(),
+            // 设置的根据件数的不同价格也不同
             'tier_price'                => $this->_product['tier_price'],
             'media_size' => [
                 'small_img_width'       => $productImgSize['small_img_width'],
@@ -85,10 +95,15 @@ class Index
                 'middle_img_width'      => $productImgSize['middle_img_width'],
             ],
             'productImgMagnifier'       => $productImgMagnifier,
+            // 规格
             'options'                   => $this->getSameSpuInfo(),
+            // 还没遇到有值的
             'custom_option'             => $this->_product['custom_option'],
+            // 产品描述 文字详情部分
             'description'               => Yii::$service->store->getStoreAttrVal($this->_product['description'], 'description'),
+            // 产品id
             '_id'                       => $this->_product['_id'],
+            // 购买过此商品的还买过的商品
             'buy_also_buy'              => $this->getProductBySkus($skus),
         ];
     }
@@ -480,10 +495,9 @@ class Index
         // 通过上面查询的属性组，得到属性组对应的属性列表
         // 然后重新查询产品
         $attr_group = $this->_product['attr_group'];
-
+        // 把组属性赋值给model
         Yii::$service->product->addGroupAttrs($attr_group);
-
-        // 重新查询产品信息。
+        // 重新查询产品信息。 因为上面那一步赋值了一些属性值，这里重新查一下
         $product = Yii::$service->product->getByPrimaryKey($primaryVal);
         $this->_product = $product;
         return true;
