@@ -1,7 +1,7 @@
 <?php
 /**
  * FecShop file.
- *
+ * 首页商品视图
  * @link http://www.fecshop.com/
  * @copyright Copyright (c) 2016 FecShop Software LLC
  * @license http://www.fecshop.com/license/

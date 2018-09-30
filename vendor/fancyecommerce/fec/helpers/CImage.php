@@ -64,6 +64,7 @@ class CImage
 	
 	
 	/**
+     * 缩放图片，加水印
 	 * @property $imgPath|String 原来图片的绝对路径
 	 * @property $newPath|String 压缩尺寸，并加入水印后的图片保存路径。
 	 * @property $resize|Array or String 图片压缩后的宽度，[111,222];

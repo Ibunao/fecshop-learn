@@ -16,9 +16,9 @@ class Index
         // change current layout File.
         //Yii::$service->page->theme->layoutFile = 'home.php';
         return [
-            // 主打产品
+            // 热销产品
             'bestFeaturedProducts'     => $this->getFeaturedProduct(),
-            // 热卖产品
+            // 特色产品
             'bestSellerProducts'    => $this->getBestSellerProducts(),
         ];
     }

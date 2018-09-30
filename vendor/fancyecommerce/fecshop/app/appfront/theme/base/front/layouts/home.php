@@ -61,6 +61,7 @@ $cssOptions = [
 		<!-- 底部 -->
 		<?= Yii::$service->page->widget->render('footer',$this); ?>
 	</div>
+	<!-- 追踪代码， js -->
     <?= Yii::$service->page->widget->render('trace',$this); ?>
     <!-- 右边小按钮，回顶部或底部的 -->
 	<?= Yii::$service->page->widget->render('scroll',$this); ?>

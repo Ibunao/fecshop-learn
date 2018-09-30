@@ -1,5 +1,6 @@
 <?php
 /**
+ * 页面头部
  * FecShop file.
  *
  * @link http://www.fecshop.com/

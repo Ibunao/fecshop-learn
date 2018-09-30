@@ -24,7 +24,7 @@ use yii\base\InvalidConfigException;
 class Request extends \yii\web\Request
 {
     /**
-     * 路由重写放在这里了，而不是使用rule
+     * 路由重写放在这里了，根据路由的key获取到真正的url而不是直接使用rule，如果有rule这个获取到的url还会匹配rule
      * rewrite yii\web\Request  resolveRequestUri().
      */
     protected function resolveRequestUri()
@@ -54,6 +54,7 @@ class Request extends \yii\web\Request
     }
 
     /**
+     * 通过数据库获取对应的url
      * get module request url by db ;.
      */
     protected function getRewriteUri($requestUri)

@@ -44,6 +44,7 @@ class Index
     protected $_filterPriceAttr = 'price';
     // 产品总数
     protected $_productCount;
+    // 允许的属性查询条件
     protected $_filter_attr;
     protected $_numPerPageVal;
 
@@ -394,7 +395,6 @@ class Index
                         $this->_numPerPageVal = $category_query_config['numPerPage'][0];
                     }
                 }
-            // 如果  -- 这个判断多余
             } elseif (!$this->_numPerPageVal) {
                 // 如果请求参数设置了分页的大小，如果不符合配置的，视为攻击
                 if (isset($category_query_config['numPerPage']) && is_array($category_query_config['numPerPage'])) {
@@ -431,7 +431,7 @@ class Index
                 'url_key', 'score',
             ];
         $category_query = Yii::$app->getModule('catalog')->params['category_query'];
-        // 因为要排序，所以要把排序的字段加到select中
+        // 因为mongo排序，要把排序的字段加到select中
         if (is_array($category_query['sort'])) {
             foreach ($category_query['sort'] as $sort_item) {
                 $select[] = $sort_item['db_columns'];
@@ -455,8 +455,9 @@ class Index
      */
     protected function initWhere()
     {
-        // 属性条件
+        // 允许查询的属性条件
         $filterAttr = $this->getFilterAttr();
+        // 获取允许查询的属性的值
         foreach ($filterAttr as $attr) {
             $attrUrlStr = Yii::$service->url->category->attrValConvertUrlStr($attr);
             $val = Yii::$app->request->get($attrUrlStr);
@@ -527,6 +528,7 @@ class Index
     {
         // 如果分类使用面包屑导航
         if (Yii::$app->controller->module->params['category_breadcrumbs']) {
+            // 获取父分类
             $parent_info = Yii::$service->category->getAllParentInfo($this->_category['parent_id']);
             if (is_array($parent_info) && !empty($parent_info)) {
                 foreach ($parent_info as $info) {

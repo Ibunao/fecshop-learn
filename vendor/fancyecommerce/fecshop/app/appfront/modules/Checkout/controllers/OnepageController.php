@@ -37,6 +37,7 @@ class OnepageController extends AppfrontController
             Yii::$service->customer->setLoginSuccessRedirectUrl($checkoutOrderUrl);
             return Yii::$service->url->redirectByUrlKey('customer/account/login');
         } 
+        // 如果提交订单
         $_csrf = Yii::$app->request->post('_csrf');
         if ($_csrf) {
             $status = $this->getBlock('placeorder')->getLastData();
