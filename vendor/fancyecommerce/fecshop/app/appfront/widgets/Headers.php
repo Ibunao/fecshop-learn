@@ -21,7 +21,9 @@ class Headers implements BlockCache
         //$currentLang =
         //$currency = Yii::$service->page->currency->getCurrentCurrency();
         return [
+            // 退出
             'logoutUrl'            => $logoutUrl,
+            // 首页
             'homeUrl'            => Yii::$service->url->homeUrl(),
             'currentBaseUrl'    => Yii::$service->url->getCurrentBaseUrl(),
             'currentStore'        => Yii::$service->store->currentStore,

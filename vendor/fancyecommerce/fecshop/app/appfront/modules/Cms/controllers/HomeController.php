@@ -14,7 +14,7 @@ class HomeController extends AppfrontController
 
     public function behaviors()
     {
-        // 判断是否满足h5跳转到vueapp的条件
+        // 判断是否满足h5跳转到vueapp的条件(pc跳转到h5的逻辑会在boostrap阶段的store中执行)
         if (Yii::$service->store->isAppServerMobile()) {
             $urlPath = '';
             // h5跳转到vueapp
@@ -26,6 +26,7 @@ class HomeController extends AppfrontController
         if (Yii::$service->cache->isEnable($cacheName)) {
             // 配置的缓存时间
             $timeout = Yii::$service->cache->timeout($cacheName);
+            // 不使用缓存的url参数
             $disableUrlParam = Yii::$service->cache->disableUrlParam($cacheName);
             $get = Yii::$app->request->get();
             // 存在无缓存参数，则关闭缓存
@@ -47,7 +48,8 @@ class HomeController extends AppfrontController
                 'only' => ['index'],
                 'duration' => $timeout,
                 'variations' => [
-                    $store, $currency,// 用来区分缓存
+                    // 不同的参数的值会对应相应的缓存，常用的是根据语言来缓存
+                    $store, $currency,
                 ],
             ];
         }

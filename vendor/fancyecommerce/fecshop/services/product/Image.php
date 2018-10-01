@@ -134,7 +134,7 @@ class Image extends Service
      * @property $imgResize | Array or Int ， 数组 [230,230] 代表生成的图片为230*230，如果宽度或者高度不够，则会用白色填充
      *                  如果 $imgResize设置为 230， 则宽度不变，高度按照原始图的比例计算出来。
      * @property $isWatered | Boolean ， 产品图片是否打水印。
-     * 获取相应尺寸的产品图片。
+     * 获取相应尺寸的产品图片。添加水印
      */
     protected function actionGetNewPathAndUrl($imageVal, $imgResize, $isWatered = false)
     {
@@ -147,8 +147,10 @@ class Image extends Service
         if ($isWatered) {
             $waterImgPath = $this->getDir('/'.$this->waterImg);
         }
+        // 组成新路径
         list($newPath, $newUrl) = $this->getProductNewPath($imageVal, $imgResize, $waterImgPath);
         if($newPath && $newUrl){
+            // 如果不存在则生成
             if (!file_exists($newPath)) {
                 \fec\helpers\CImage::saveResizeMiddleWaterImg($originImgPath, $newPath, $imgResize, $waterImgPath);
             }

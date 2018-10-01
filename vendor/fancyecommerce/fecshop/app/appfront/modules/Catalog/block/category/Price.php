@@ -21,7 +21,10 @@ class Price
     public $special_price;
     public $special_from;
     public $special_to;
-
+    /**
+     * 获取当前币种的价格
+     * @return [type] [description]
+     */
     public function getLastData()
     {
         return  Yii::$service->product->price->getCurrentCurrencyProductPriceInfo($this->price, $this->special_price, $this->special_from, $this->special_to);

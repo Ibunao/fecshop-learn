@@ -1,5 +1,6 @@
 <?php
 /**
+ * 分类视图
  * FecShop file.
  *
  * @link http://www.fecshop.com/

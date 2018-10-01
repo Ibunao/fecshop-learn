@@ -98,7 +98,7 @@ class AppfrontController extends FecController
     {
         // 根据fecshop的theme来获取视图文件
         $viewFile = Yii::$service->page->theme->getViewFile($view);
-        // 这里也会用到yii自带的theme
+        // 这里也会用到yii自带的theme组件
         $content = Yii::$app->view->renderFile($viewFile, $params, $this);
         // 挟带layout 因为重写了findLayoutFile会先找fecshop配置的theme，在找yii配置的theme
         return $this->renderContent($content);

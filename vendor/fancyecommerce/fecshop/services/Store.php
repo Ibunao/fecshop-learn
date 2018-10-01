@@ -31,10 +31,12 @@ class Store extends Service
      */
     public $store;
     /**
+     * 当前语言
      * current store language,for example: en_US,fr_FR.
      */
     public $currentLang;
     /**
+     * 语言全名
      * current store language name.
      */
     public $currentLangName;
@@ -89,6 +91,7 @@ class Store extends Service
      */
     protected function actionBootstrap($app)
     {
+        // 分割协议http 和 域名部分
         $host = explode('//', $app->getHomeUrl());
         $stores = $this->stores;
         $init_compelte = 0;
@@ -105,12 +108,12 @@ class Store extends Service
                         Yii::$service->store->currentLang = $store['language'];
                         // 获取语言简码
                         Yii::$service->store->currentLangCode = Yii::$service->fecshoplang->getLangCodeByLanguage($store['language']);
-                        // 语言名
+                        // 语言全名
                         Yii::$service->store->currentLangName = $store['languageName'];
                         // 设置当前语言 Yii::$app->language
                         Yii::$service->page->translate->setLanguage($store['language']);
                     }
-                    // 作者已经注释掉相关属性，这段代码也无用了
+                    // 作者已经注释掉currentTheme属性，这段代码也无用了
                     // if (isset($store['theme']) && !empty($store['theme'])) {
                     //     Yii::$service->store->currentTheme = $store['theme'];
                     // }
@@ -122,7 +125,8 @@ class Store extends Service
                         //Yii::$service->page->theme->localThemeDir = $store['localThemeDir'];
                         Yii::$service->page->theme->setLocalThemeDir($store['localThemeDir']);
                     }
-                    /*
+                    /**
+                     * 第三方主题路径
                      * set third theme dir.
                      */
                     if (isset($store['thirdThemeDir']) && $store['thirdThemeDir']) {
@@ -151,7 +155,9 @@ class Store extends Service
                     if(isset($store['serverLangs']) && !empty($store['serverLangs'])){
                         $this->serverLangs = $store['serverLangs'];
                     }
+                    // 获取header
                     $headers = Yii::$app->request->getHeaders();
+                    // 设置语言
                     if(isset($headers['fecshop-lang']) && $headers['fecshop-lang']){
                         $h_lang = $headers['fecshop-lang'];
                         if(is_array($this->serverLangs)){
@@ -165,6 +171,7 @@ class Store extends Service
                             }
                         }
                     }
+                    // 设置币种
                     if(isset($headers['fecshop-currency']) && $headers['fecshop-currency']){
                         $currentC = Yii::$service->page->currency->getCurrentCurrency();
                         if($currentC != $headers['fecshop-currency']){
@@ -207,7 +214,7 @@ class Store extends Service
             $mobileDetect = Yii::$service->helper->mobileDetect;
             // 是否使用https
             $mobile_https = (isset($store['mobile']['https']) && $store['mobile']['https']) ? true : false;
-            // 终端符合条件进行跳转,直接跳不就行了，还弄这么多判断???
+            // 终端符合条件进行跳转
             if (in_array('phone', $condition) && in_array('tablet', $condition)) {
                 if ($mobileDetect->isMobile()) {
                     $this->redirectAppHtml5Mobile($store_code, $redirectDomain, $mobile_https);

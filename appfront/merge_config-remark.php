@@ -462,9 +462,10 @@ return
                         12=>'cpu',
                     ],
                 ],
+
                 'product'=>
                 [
-                    'enable'=>true,
+                    'enable'=>false,// 关闭商品缓存
                     'timeout'=>3600,
                     'disableUrlParam'=>'fecshop',
                 ],
@@ -778,6 +779,7 @@ return
         'helper'=>
         [
             'class'=>'fecshop\services\Helper',
+            // 子服务
             'childService'=>
             [
                 'ar'=>
@@ -1439,6 +1441,7 @@ return
                             ],
                         ],
                     ],
+                    // 自定义的规格
                     'custom_options'=>
                     [
                         'my_color'=>
@@ -2210,26 +2213,32 @@ return
             'class'=>'fecshop\services\Store',
             'stores'=>
             [
+                // 对应域名下的配置
                 'appfront.fecshoptest.com'=>
                 [
-                    'language'=>'en_US',
+                    // 语言
+                    'language'=>'en_US', 
                     'languageName'=>'English',
                     'thirdThemeDir'=>
                     [
 
                     ],
                     'currency'=>'USD',
+                    // 是否允许跳转到手机端
                     'mobile'=>
                     [
-                        'enable'=>true,
+                        'enable'=>true, # true 允许
+                        // 条件
                         'condition'=>
                         [
                             0=>'phone',
                             1=>'tablet',
                         ],
+                        // 跳转到的域名
                         'redirectDomain'=>'apphtml5.fecshoptest.com',
                         'https'=>false,
-                        'type'=>'appserver',
+                        // 跳转到app的类型，要和redirectDomain相匹配
+                        'type'=>'apphtml5',
                     ],
                     'thirdLogin'=>
                     [

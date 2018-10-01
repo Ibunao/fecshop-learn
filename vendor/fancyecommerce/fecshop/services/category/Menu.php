@@ -28,7 +28,7 @@ class Menu extends Service
         list($this->_categoryModelName,$this->_categoryModel) = Yii::mapGet($this->_categoryModelName);  
     }
     /**
-     * 无限级分类
+     * 商品无限级分类，视图用了三级
      * @property $parentId | int 
      * 得到分类的目录信息
      */
