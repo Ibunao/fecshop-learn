@@ -32,6 +32,7 @@ class OnepageController extends AppfrontController
             Yii::$service->store->redirectAppServerMobile($urlPath);
         }
         $guestOrder = Yii::$app->controller->module->params['guestOrder'];
+        // 如果不允许未登录这购买跳转到登录
         if(!$guestOrder && Yii::$app->user->isGuest){
             $checkoutOrderUrl = Yii::$service->url->getUrl('checkout/onepage/index');
             Yii::$service->customer->setLoginSuccessRedirectUrl($checkoutOrderUrl);

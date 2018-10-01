@@ -12,6 +12,7 @@ namespace fecshop\app\appfront\modules\Checkout\block\onepage;
 use Yii;
 
 /**
+ * 创建订单
  * @author Terry Zhao <2358269014@qq.com>
  * @since 1.0
  */
