@@ -28,6 +28,7 @@ class ProductController extends AppfrontController
     public function actionIndex()
     {
         $data = $this->getBlock()->getLastData();
+        // var_dump($data);exit;
         if(is_array($data)){
             return $this->render($this->action->id, $data);
         }
@@ -100,7 +101,7 @@ class ProductController extends AppfrontController
         $qty = Yii::$app->request->get('qty');
         $cart_price = 0;
         $custom_option_price = 0;
-        $product = Yii::$service->product->getByPrimaryKey($product_id);
+        // $product = Yii::$service->product->getByPrimaryKey($product_id);
         $cart_price = Yii::$service->product->price->getCartPriceByProductId($product_id, $qty, $custom_option_sku);
         if (!$cart_price) {
             return;

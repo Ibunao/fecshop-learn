@@ -20,6 +20,10 @@ class CartController extends AppfrontController
 {
     public $enableCsrfValidation = false;
 
+    /**
+     * 购物车
+     * @return [type] [description]
+     */
     public function actionIndex()
     {
         if (Yii::$service->store->isAppServerMobile()) {
@@ -37,6 +41,7 @@ class CartController extends AppfrontController
     public function actionAdd()
     {
         $this->enableCsrfValidation = true;
+        // 用户自定义的产品属性
         $custom_option = Yii::$app->request->post('custom_option');
         $product_id = Yii::$app->request->post('product_id');
         $qty = Yii::$app->request->post('qty');

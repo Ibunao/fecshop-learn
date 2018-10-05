@@ -278,16 +278,16 @@ class Index
      */
     protected function getSameSpuInfo()
     {
-        $groupAttr = Yii::$service->product->getGroupAttr($this->_product['attr_group']);
+        // $groupAttr = Yii::$service->product->getGroupAttr($this->_product['attr_group']);
         // 当前的产品对应的spu属性组的属性，譬如 ['color','size','myyy']
         $this->_productSpuAttrArr = Yii::$service->product->getSpuAttr($this->_product['attr_group']);
         //var_dump($this->_productSpuAttrArr);exit;
+        // 显示图片的属性
         $this->_spuAttrShowAsImg = Yii::$service->product->getSpuImgAttr($this->_product['attr_group']);
         if (!is_array($this->_productSpuAttrArr) || empty($this->_productSpuAttrArr)) {
             return;
         }
         // 当前的spu属性对应值数组 $['color'] = 'red'
-
         $this->_currentSpuAttrValArr = [];
         foreach ($this->_productSpuAttrArr as $spuAttr) {
             $spuAttrVal = $this->_product[$spuAttr];
